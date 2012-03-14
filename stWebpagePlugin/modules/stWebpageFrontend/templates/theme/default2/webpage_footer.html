@@ -1,0 +1,24 @@
+<div id="webpage_groups">
+    {assign var='i' value=0}
+    {foreach key=row item=webpages_group from=$results}
+        {assign var='i' value=$i+1}
+        {if $i == 5}
+            <div class="group last">
+            {assign var='i' value=0}
+        {elseif $i==1}
+            <div class="group first">
+        {else}
+            <div class="group">
+        {/if}    
+            {st_get_component module="stWebpageFrontend" component="groupWebpage" params="id=`$webpages_group.id`"}
+        </div>
+    {/foreach}   
+    <div class="group last">
+        <h4>{__ text="Sklep"}</h4>
+        {link text="Strona główna" langCatalogue="stFrontend" uri="@homepage"}
+        {st_get_component module="stRecommendShopFrontend" component="showRecommend"}
+        {st_get_component module="stSitemapFrontend" component="link"}
+    </div>
+    {st_get_component module="stNewsletterFrontend" component="newsletter"}
+</div>
+
